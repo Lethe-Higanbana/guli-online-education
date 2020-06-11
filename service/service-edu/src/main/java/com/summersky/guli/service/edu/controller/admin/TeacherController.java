@@ -1,10 +1,13 @@
 package com.summersky.guli.service.edu.controller.admin;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.service.edu.entity.Teacher;
+import com.summersky.guli.service.edu.entity.vo.TeacherQueryVo;
 import com.summersky.guli.service.edu.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +54,23 @@ public class TeacherController {
             return R.error().message("数据不存在");
         }
 
+    }
+
+    /**
+     * 讲师分页列表
+     * @param page
+     * @param limit
+     * @return
+     */
+    @ApiOperation("讲师分页查询")
+    @GetMapping("page/{page}/{limit}")
+    public R listPage(@ApiParam("当前页") @PathVariable(required = true) Long page, @ApiParam("每页记录数") @PathVariable(required = true) Long limit,
+                      @ApiParam("讲师查询列表对象") TeacherQueryVo teacherQueryVo){
+        Page<Teacher> pageParam = new Page<>(page, limit);
+        Page<Teacher> iPage = teacherService.selectPage(pageParam,teacherQueryVo);
+        List<Teacher> records = iPage.getRecords();
+        long total = iPage.getTotal();
+        return R.ok().data("total",total).data("rows",records);
     }
 }
 

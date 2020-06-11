@@ -1,8 +1,10 @@
 package com.summersky.guli.service.edu.controller.admin;
 
 
+import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.service.edu.entity.Teacher;
 import com.summersky.guli.service.edu.service.TeacherService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +29,11 @@ public class TeacherController {
      * 获取所有讲师数据
      * @return
      */
+    @ApiOperation("查询所有讲师数据")
     @GetMapping("list")
-    public List<Teacher> listAll(){
+    public R listAll(){
         List<Teacher> list = teacherService.list();
-        return list;
+        return R.ok().data("list",list);
     }
 
     /**
@@ -38,9 +41,16 @@ public class TeacherController {
      * @param id
      * @return
      */
+    @ApiOperation("根据ID删除讲师")
     @DeleteMapping("remove/{id}")
-    public boolean removeById(@PathVariable String id){
-        return teacherService.removeById(id);
+    public R removeById(@PathVariable String id){
+        boolean b = teacherService.removeById(id);
+        if (b){
+            return R.ok().message("删除成功");
+        }else {
+            return R.error().message("数据不存在");
+        }
+
     }
 }
 

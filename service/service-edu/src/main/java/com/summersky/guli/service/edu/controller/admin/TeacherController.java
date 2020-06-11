@@ -72,5 +72,49 @@ public class TeacherController {
         long total = iPage.getTotal();
         return R.ok().data("total",total).data("rows",records);
     }
+
+    /**
+     * 新增
+     * @param teacher
+     * @return
+     */
+    @ApiOperation("新增讲师数据")
+    @PostMapping("save")
+    public R save(@ApiParam("讲师对象") @RequestBody Teacher teacher){
+        teacherService.save(teacher);
+        return R.ok().message("保存成功");
+    }
+
+    /**
+     * 修改
+     * @param teacher
+     * @return
+     */
+    @ApiOperation("更新讲师数据")
+    @PutMapping("update")
+    public R update(@ApiParam("讲师对象") @RequestBody Teacher teacher){
+        boolean b = teacherService.updateById(teacher);
+        if (b){
+            return R.ok().message("更新成功");
+        }else {
+            return R.ok().message("更新失败");
+        }
+    }
+    /**
+     * 根据ID获取讲师数据
+     * @param id
+     * @return
+     */
+    @ApiOperation("更新讲师数据")
+    @GetMapping("get/{id}")
+    public R get(@ApiParam("讲师ID") @PathVariable String id){
+        Teacher teacher = teacherService.getById(id);
+        if (teacher!=null){
+            return R.ok().data("items",teacher);
+        }else {
+            return R.error().message("数据不存在");
+        }
+
+    }
 }
 

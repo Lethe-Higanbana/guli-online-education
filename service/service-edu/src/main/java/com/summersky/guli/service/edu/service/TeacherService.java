@@ -5,6 +5,9 @@ import com.summersky.guli.service.edu.entity.Teacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.summersky.guli.service.edu.entity.vo.TeacherQueryVo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 讲师 服务类
@@ -21,4 +24,6 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     Page<Teacher> selectPage(Page<Teacher> pageParam, TeacherQueryVo teacherQueryVo);
+
+    List<Map<String, Object>> selectNameList(String key);
 }

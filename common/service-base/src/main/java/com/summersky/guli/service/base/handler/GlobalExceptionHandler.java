@@ -3,6 +3,7 @@ package com.summersky.guli.service.base.handler;
 import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.common.base.result.ResultCodeEnum;
 import com.summersky.guli.common.base.util.ExceptionUtils;
+import com.summersky.guli.service.base.exception.GuliException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.jdbc.BadSqlGrammarException;
@@ -21,7 +22,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public R error(Exception e){
-//        e.printStackTrace();
         log.error(ExceptionUtils.getMessage(e));
         return R.error();
     }
@@ -38,5 +38,12 @@ public class GlobalExceptionHandler {
     public R error(HttpMessageNotReadableException e){
         log.error(ExceptionUtils.getMessage(e));
         return R.setResult(ResultCodeEnum.JSON_PARSE_ERROR);
+    }
+
+    @ExceptionHandler(GuliException.class)
+    @ResponseBody
+    public R error(GuliException e){
+        log.error(ExceptionUtils.getMessage(e));
+        return R.error().message(e.getMessage()).code(e.getCode());
     }
 }

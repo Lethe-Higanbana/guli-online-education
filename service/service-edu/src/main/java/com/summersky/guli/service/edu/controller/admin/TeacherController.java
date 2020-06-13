@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -116,6 +117,33 @@ public class TeacherController {
             return R.error().message("数据不存在");
         }
 
+    }
+
+    /**
+     * 根据ID删除
+     * @param ids
+     * @return
+     */
+    @ApiOperation("根据ID列表删除讲师")
+    @DeleteMapping("batch-remove")
+    public R batchRemove(@RequestBody List<String> ids){
+        boolean b = teacherService.removeByIds(ids);
+        if (b){
+            return R.ok().message("删除成功");
+        }else {
+            return R.error().message("数据不存在");
+        }
+
+    }
+
+    @ApiOperation("根据关键字查询讲师名列表")
+    @GetMapping("list/name/{key}")
+    public R selectNameListByKey(
+            @ApiParam(value = "关键字", required = true)
+            @PathVariable String key){
+        List<Map<String, Object>> nameList = teacherService.selectNameList(key);
+
+        return R.ok().data("nameList", nameList);
     }
 }
 

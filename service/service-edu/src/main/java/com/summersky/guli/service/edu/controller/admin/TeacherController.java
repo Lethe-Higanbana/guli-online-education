@@ -49,6 +49,10 @@ public class TeacherController {
     @ApiOperation("根据ID删除讲师")
     @DeleteMapping("remove/{id}")
     public R removeById(@PathVariable String id){
+
+        // 删除讲师头像
+        boolean flag = teacherService.removeAvatarById(id);
+        // 删除讲师
         boolean b = teacherService.removeById(id);
         if (b){
             return R.ok().message("删除成功");

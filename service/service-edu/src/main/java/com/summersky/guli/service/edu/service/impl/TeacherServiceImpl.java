@@ -2,12 +2,15 @@ package com.summersky.guli.service.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.service.edu.entity.Teacher;
 import com.summersky.guli.service.edu.entity.vo.TeacherQueryVo;
+import com.summersky.guli.service.edu.feign.OssFileService;
 import com.summersky.guli.service.edu.mapper.TeacherMapper;
 import com.summersky.guli.service.edu.service.TeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,9 @@ import java.util.Map;
  */
 @Service
 public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> implements TeacherService {
+
+    @Autowired
+    private OssFileService ossFileService;
 
     @Override
     public Page<Teacher> selectPage(Page<Teacher> pageParam, TeacherQueryVo teacherQueryVo) {
@@ -66,5 +72,21 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         queryWrapper.likeRight("name", key);
         List<Map<String, Object>> list = baseMapper.selectMaps(queryWrapper);
         return list;
+    }
+
+    @Override
+    public boolean removeAvatarById(String id) {
+
+        // 根据ID获取讲师头像
+        Teacher teacher = baseMapper.selectById(id);
+        if (teacher!=null){
+            String avatar = teacher.getAvatar();
+            if (!StringUtils.isEmpty(avatar)){
+                R r = ossFileService.removeFile(avatar);
+                return r.getSuccess();
+            }
+        }
+
+        return false;
     }
 }

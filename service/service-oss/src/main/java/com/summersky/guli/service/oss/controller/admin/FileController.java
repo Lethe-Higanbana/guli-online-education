@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lenovo
@@ -50,5 +51,24 @@ public class FileController {
             log.error(ExceptionUtils.getMessage(e));
             throw new GuliException(ResultCodeEnum.FILE_UPLOAD_ERROR);
         }
+    }
+    @ApiOperation(value = "文件删除")
+    @DeleteMapping("remove")
+    public R removeFile(@ApiParam(value = "要删除的文件url路径", required = true)
+                            @RequestBody String url){
+        fileService.removeFile(url);
+        return R.ok().message("文件删除成功");
+    }
+
+    @ApiOperation(value = "测试")
+    @GetMapping("test")
+    public R test() {
+        log.info("oss test被调用");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return R.ok();
     }
 }

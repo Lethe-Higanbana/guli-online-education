@@ -8,6 +8,7 @@ import com.summersky.guli.service.edu.entity.vo.TeacherQueryVo;
 import com.summersky.guli.service.edu.service.TeacherService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ import java.util.Map;
 @CrossOrigin // 允许跨域访问，别的服务器可以发送ajax请求过来
 @RestController
 @RequestMapping("/admin/edu/teacher")
+@Slf4j
 public class TeacherController {
 
     @Autowired
@@ -148,6 +150,13 @@ public class TeacherController {
         List<Map<String, Object>> nameList = teacherService.selectNameList(key);
 
         return R.ok().data("nameList", nameList);
+    }
+
+    @ApiOperation("测试并发")
+    @GetMapping("test_concurrent")
+    public R testConcurrent(){
+        log.info("test_concurrent");
+        return R.ok();
     }
 }
 

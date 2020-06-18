@@ -1,6 +1,7 @@
 server:
   port: 8110 # 服务端口
-
+  tomcat:
+    max-threads: 10 #tomcat的最大并发值修改为10,默认是200
 spring:
   profiles:
     active: dev # 环境设置
@@ -29,6 +30,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:com/summersky/guli/service/edu/mapper/xml/*.xml
 
 # 设置日志级别
 #logging:

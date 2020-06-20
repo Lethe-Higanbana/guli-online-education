@@ -2,6 +2,9 @@ package com.summersky.guli.service.edu.service;
 
 import com.summersky.guli.service.edu.entity.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.summersky.guli.service.edu.entity.vo.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ChapterService extends IService<Chapter> {
 
+    boolean removeChapterById(String id);
+
+    List<ChapterVo> nestedList(String courseId);
 }

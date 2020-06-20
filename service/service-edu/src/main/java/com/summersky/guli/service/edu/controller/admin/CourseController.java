@@ -85,13 +85,13 @@ public class CourseController {
     @DeleteMapping("remove/{id}")
     public R removeById(@ApiParam(value = "课程id", required = true) @PathVariable String id){
 
-        //TODO: 删除课程视频
-        //此处调用vod中的删除视频文件的接口
+        // TODO: 删除课程视频
+        // 此处调用vod中的删除视频文件的接口
 
-        //删除课程封面
+        // 删除课程封面
         courseService.removeCoverById(id);
 
-        //删除课程
+        // 删除课程
         boolean result = courseService.removeCourseById(id);
         if(result){
             return R.ok().message("删除成功");

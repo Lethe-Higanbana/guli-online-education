@@ -7,6 +7,7 @@ import com.summersky.guli.service.edu.entity.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.summersky.guli.service.edu.entity.vo.CoursePublishVo;
 import com.summersky.guli.service.edu.entity.vo.CourseVo;
+import com.summersky.guli.service.edu.entity.vo.WebCourseVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,4 +27,6 @@ public interface CourseMapper extends BaseMapper<Course> {
             @Param(Constants.WRAPPER) QueryWrapper<CourseVo> queryWrapper);
 
     CoursePublishVo selectCoursePublishVoById(String id);
+
+    WebCourseVo selectWebCourseVoById(String id);
 }

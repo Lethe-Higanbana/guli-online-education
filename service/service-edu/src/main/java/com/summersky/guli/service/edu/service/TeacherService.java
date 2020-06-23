@@ -30,4 +30,6 @@ public interface TeacherService extends IService<Teacher> {
     boolean removeAvatarById(String id);
 
     Map<String, Object> selectTeacherInfoById(String id);
+
+    List<Teacher> selectHotTeacher();
 }

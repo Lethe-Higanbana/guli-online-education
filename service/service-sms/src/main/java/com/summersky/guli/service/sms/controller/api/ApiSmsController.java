@@ -47,7 +47,10 @@ public class ApiSmsController {
         String checkCode = RandomUtils.getFourBitRandom();
 
         //发送验证码
-        smsService.send(mobile, checkCode);
+        //smsService.send(mobile, checkCode);
+
+        // 阿里短信收费了，这里以日志形式查看验证码
+        log.info("验证码为："+checkCode);
 
         //存储验证码到redis
         redisTemplate.opsForValue().set(mobile, checkCode, 5, TimeUnit.MINUTES);

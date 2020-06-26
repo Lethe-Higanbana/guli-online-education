@@ -5,6 +5,7 @@ import com.summersky.guli.common.base.util.FormUtils;
 import com.summersky.guli.common.base.util.JwtInfo;
 import com.summersky.guli.common.base.util.JwtUtils;
 import com.summersky.guli.common.base.util.MD5;
+import com.summersky.guli.service.base.dto.MemberDto;
 import com.summersky.guli.service.base.exception.GuliException;
 import com.summersky.guli.service.ucenter.entity.Member;
 import com.summersky.guli.service.ucenter.entity.vo.LoginVo;
@@ -13,6 +14,7 @@ import com.summersky.guli.service.ucenter.mapper.MemberMapper;
 import com.summersky.guli.service.ucenter.service.MemberService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -122,5 +124,13 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("openid", openid);
         return baseMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public MemberDto getMemberDtoByMemberId(String memberId) {
+        Member member = baseMapper.selectById(memberId);
+        MemberDto memberDto = new MemberDto();
+        BeanUtils.copyProperties(member, memberDto);
+        return memberDto;
     }
 }

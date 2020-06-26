@@ -5,12 +5,14 @@ import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.common.base.result.ResultCodeEnum;
 import com.summersky.guli.common.base.util.JwtInfo;
 import com.summersky.guli.common.base.util.JwtUtils;
+import com.summersky.guli.service.base.dto.MemberDto;
 import com.summersky.guli.service.base.exception.GuliException;
 import com.summersky.guli.service.ucenter.entity.vo.LoginVo;
 import com.summersky.guli.service.ucenter.entity.vo.RegisterVo;
 import com.summersky.guli.service.ucenter.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +62,15 @@ public class ApiMemberController {
             log.error("解析用户信息失败：" + e.getMessage());
             throw new GuliException(ResultCodeEnum.FETCH_USERINFO_ERROR);
         }
+    }
+
+    @ApiOperation("根据会员id查询会员信息")
+    @GetMapping("inner/get-member-dto/{memberId}")
+    public MemberDto getMemberDtoByMemberId(
+            @ApiParam(value = "会员ID", required = true)
+            @PathVariable String memberId){
+        MemberDto memberDto = memberService.getMemberDtoByMemberId(memberId);
+        return memberDto;
     }
 }
 

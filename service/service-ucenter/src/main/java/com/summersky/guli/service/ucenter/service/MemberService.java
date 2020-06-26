@@ -1,5 +1,6 @@
 package com.summersky.guli.service.ucenter.service;
 
+import com.summersky.guli.service.base.dto.MemberDto;
 import com.summersky.guli.service.ucenter.entity.Member;
 import com.summersky.guli.service.ucenter.entity.vo.LoginVo;
 import com.summersky.guli.service.ucenter.entity.vo.RegisterVo;
@@ -20,4 +21,6 @@ public interface MemberService extends IService<Member> {
     String login(LoginVo loginVo);
 
     Member getByOpenid(String openid);
+
+    MemberDto getMemberDtoByMemberId(String memberId);
 }

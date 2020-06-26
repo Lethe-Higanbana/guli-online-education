@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.summersky.guli.common.base.result.R;
+import com.summersky.guli.service.base.dto.CourseDto;
 import com.summersky.guli.service.edu.entity.*;
 import com.summersky.guli.service.edu.entity.form.CourseInfoForm;
 import com.summersky.guli.service.edu.entity.vo.*;
@@ -255,5 +256,10 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         queryWrapper.last("limit 8");
 
         return baseMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public CourseDto getCourseDtoById(String courseId) {
+        return baseMapper.selectCourseDtoById(courseId);
     }
 }

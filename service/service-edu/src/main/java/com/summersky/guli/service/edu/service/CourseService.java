@@ -1,6 +1,7 @@
 package com.summersky.guli.service.edu.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.summersky.guli.service.base.dto.CourseDto;
 import com.summersky.guli.service.edu.entity.Course;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.summersky.guli.service.edu.entity.form.CourseInfoForm;
@@ -42,4 +43,6 @@ public interface CourseService extends IService<Course> {
      */
     WebCourseVo selectWebCourseVoById(String id);
     List<Course> selectHotCourse();
+
+    CourseDto getCourseDtoById(String courseId);
 }

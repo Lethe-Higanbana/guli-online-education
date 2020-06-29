@@ -1,5 +1,6 @@
 package com.summersky.guli.service.trade.feign.fallback;
 
+import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.service.base.dto.CourseDto;
 import com.summersky.guli.service.trade.feign.EduCourseService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,5 +18,11 @@ public class EduCourseServiceFallback implements EduCourseService {
     public CourseDto getCourseDtoById(String courseId) {
         log.info("熔断保护");
         return null;
+    }
+
+    @Override
+    public R updateBuyCountById(String courseId) {
+        log.info("熔断保护");
+        return R.error();
     }
 }

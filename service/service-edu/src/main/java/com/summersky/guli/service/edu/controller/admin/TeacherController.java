@@ -23,7 +23,7 @@ import java.util.Map;
  * @author zengfanbin
  * @since 2020-06-11
  */
-@CrossOrigin // 允许跨域访问，别的服务器可以发送ajax请求过来
+//@CrossOrigin // 允许跨域访问，别的服务器可以发送ajax请求过来
 @RestController
 @RequestMapping("/admin/edu/teacher")
 @Slf4j

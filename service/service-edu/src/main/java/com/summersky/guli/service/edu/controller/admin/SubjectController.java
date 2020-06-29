@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping("/admin/edu/subject")
 @Slf4j
 @Api(description = "课程分类管理")
-@CrossOrigin
+//@CrossOrigin
 public class SubjectController {
     @Autowired
     private SubjectService subjectService;

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @author zengfanbin
  * @since 2020-06-11
  */
-@CrossOrigin
+//@CrossOrigin
 @Api(description = "课时管理")
 @RestController
 @RequestMapping("/admin/edu/video")

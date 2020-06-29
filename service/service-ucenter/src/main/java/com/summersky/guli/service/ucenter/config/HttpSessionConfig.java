@@ -1,4 +1,4 @@
-package com.summersky.guli.service.base.config;
+package com.summersky.guli.service.ucenter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

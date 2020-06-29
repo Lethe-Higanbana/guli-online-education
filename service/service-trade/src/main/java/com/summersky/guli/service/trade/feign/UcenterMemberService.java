@@ -1,5 +1,6 @@
 package com.summersky.guli.service.trade.feign;
 
+import com.summersky.guli.common.base.result.R;
 import com.summersky.guli.service.base.dto.MemberDto;
 import com.summersky.guli.service.trade.feign.fallback.UcenterMemberServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,4 +18,5 @@ public interface UcenterMemberService {
 
     @GetMapping("/api/ucenter/member/inner/get-member-dto/{memberId}")
     MemberDto getMemberDtoByMemberId(@PathVariable(value = "memberId") String memberId);
+
 }

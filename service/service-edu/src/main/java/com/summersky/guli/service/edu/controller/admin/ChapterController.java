@@ -22,7 +22,7 @@ import java.util.List;
  * @author zengfanbin
  * @since 2020-06-11
  */
-@CrossOrigin //允许跨域
+//@CrossOrigin //允许跨域
 @Api(description = "章节管理")
 @RestController
 @RequestMapping("/admin/edu/chapter")

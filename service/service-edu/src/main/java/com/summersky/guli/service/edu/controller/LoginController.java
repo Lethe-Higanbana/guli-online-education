@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @Time:13:09
  * @Description:
  */
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class LoginController {
